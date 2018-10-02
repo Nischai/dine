@@ -1,0 +1,44 @@
+.navbar.navbar-transparent>.container>.navbar-translate>.navbar-brand {
+    color: #fdcc52;
+}
+
+.navbar>.container>.navbar-translate>.logo-title {
+    font: 400 40px/1.3 'Arizonia', Helvetica, sans-serif;
+    padding: 0px;
+}
+
+.navbar-nav>.nav-item>a:focus {
+    color: #fdcc52 !important;
+}
+
+.nav-link {
+    text-transform :capitalize;
+}
+.margin-up
+{
+   margin:0 0 40px 0; }
+
+.new-line
+{
+    clear: both !important; 
+    display: block !important;
+}   
+body{
+    font-family: roboto;
+}
+.tab-space {
+    padding: 20px 0 0px 0px;
+}
+.section {
+    padding: 50px 0;
+}
+
+.swipeable-tab-group > .row {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding: 0 0 30px 30px;
+  }
+
+.list-group-item-action{
+    background-color: #F4F4F4
+}

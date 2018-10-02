@@ -1,0 +1,32 @@
+{
+  "name": "dineoserve-website",
+  "version": "0.0.1",
+  "description": "Website for DineOServe Inc",
+  "main": "index.html",
+  "directories": {
+    "example": "root"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "DineOServe Inc",
+    "Restaurants",
+    "Bars",
+    "Enhanced Customer Experience",
+    "Table and Order Management",
+    "Real Time Menu updates"
+  ],
+  "author": "DineOServe Engineering Team",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-clean": "^0.4.0",
+    "gulp-install": "^1.1.0",
+    "gulp-sass": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-open": "^3.0.1"
+  },
+  "homepage": "https://www.dineoserve.com"
+}

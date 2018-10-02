@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        DineOServe
+    </title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <!--     Fonts and icons     -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- CSS Files -->
+    <link href="./assets/css/material-kit.css?v=2.0.4" rel="stylesheet" />
+    <link href="./assets/css/main.css" rel="stylesheet" />
+
+    <link href="./assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Arizonia' rel='stylesheet' type='text/css'>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/v4-shims.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c"
+        crossorigin="anonymous"></script>
+    <script src="./assets/js/core/jquery.min.js" type="text/javascript"></script>
+
+    <!-- start Mixpanel -->
+    <script type="text/javascript">(function (e, a) {
+            if (!a.__SV) {
+                var b = window; try { var c, l, i, j = b.location, g = j.hash; c = function (a, b) { return (l = a.match(RegExp(b + "=([^&]*)"))) ? l[1] : null }; g && c(g, "state") && (i = JSON.parse(decodeURIComponent(c(g, "state"))), "mpeditor" === i.action && (b.sessionStorage.setItem("_mpcehash", g), history.replaceState(i.desiredHash || "", e.title, j.pathname + j.search))) } catch (m) { } var k, h; window.mixpanel = a; a._i = []; a.init = function (b, c, f) {
+                    function e(b, a) {
+                        var c = a.split("."); 2 == c.length && (b = b[c[0]], a = c[1]); b[a] = function () {
+                            b.push([a].concat(Array.prototype.slice.call(arguments,
+                                0)))
+                        }
+                    } var d = a; "undefined" !== typeof f ? d = a[f] = [] : f = "mixpanel"; d.people = d.people || []; d.toString = function (b) { var a = "mixpanel"; "mixpanel" !== f && (a += "." + f); b || (a += " (stub)"); return a }; d.people.toString = function () { return d.toString(1) + ".people (stub)" }; k = "disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+                    for (h = 0; h < k.length; h++)e(d, k[h]); a._i.push([b, c, f])
+                }; a.__SV = 1.2; b = e.createElement("script"); b.type = "text/javascript"; b.async = !0; b.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === e.location.protocol && "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js"; c = e.getElementsByTagName("script")[0]; c.parentNode.insertBefore(b, c)
+            }
+        })(document, window.mixpanel || []);
+        mixpanel.init("b646b35af680127d3fc75399c03be174");</script><!-- end Mixpanel -->
+    <script type="text/javascript">
+        mixpanel.track("Signup");
+        mixpanel.track("features");
+        mixpanel.track("Scrolled to Restaurants features", { section: "features" });
+        mixpanel.track("diners");
+        mixpanel.track("Scrolled to diners features", { section: "diners" });
+        mixpanel.track("contact-us");
+        mixpanel.track("Scrolled to signup page", { section: "contact-us" });
+
+
+        $(document).ready(function () {
+            $("#signup").click(function () {
+                alert("Signup Clicked");
+                alert("name: " + document.getElementById("signup_name").value);
+                $.ajax({
+                    url: 'https://dineoserve-website-services.appspot.com/',
+                    method: 'POST',
+                    data: {
+                        name: document.getElementById("signup_name").value,
+                        emailId: document.getElementById("signup_email").value,
+                        hasRestaurant: document.getElementById("signup_restaurant").checked,
+                        hasBar: document.getElementById("signup_bar").checked,
+                        restName: document.getElementById("signup_resname").value,
+                        wishlist: document.getElementById("signup_wishlist").value
+                    },
+                    dataType: 'JSON',
+                    contentType: 'application/x-www-form-urlencoded',
+                    headers: 'Access-Control-Allow-Origin: https://dineoserve.com/',
+                    success: function (data) {
+
+                        document.getElementById("signup-result").style.color = "green";
+                        document.getElementById("signup-result").value = "Thank you for Signing up";
+
+                    },
+                    error: function (data) {
+
+                        document.getElementById("signup-result").style.color = "red";
+                        document.getElementById("signup-result").value = "Error while signing up, Please try again";
+
+                    }
+                });
+                var data = {
+                    name: document.getElementById("signup_name").value,
+                    emailId: document.getElementById("signup_email").value,
+                    hasRestaurant: document.getElementById("signup_restaurant").checked,
+                    hasBar: document.getElementById("signup_bar").checked,
+                    restName: document.getElementById("signup_resname").value,
+                    wishlist: document.getElementById("signup_wishlist").value
+                }
+                $.post("https://dineoserve-website-services.appspot.com/").done(function (data) {
+                    alert(data)
+                    console.log(data);
+                });
+
+            });
+        });
+
+    </script>
+
+</head>
+
+<body class="landing-page sidebar-collapse">
+    <nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+        <div class="container">
+            <div class="navbar-translate">
+                <a class="navbar-brand logo-title" href="https://dineoserve.com/index.html">
+                    DineOServe
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#diners">
+                            Diners
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">
+                            Restaurants & Bars
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact-us">
+                            Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="page-header header-filter" data-parallax="true" style="background-image: url('./assets/img/chair-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto">
+                    <h2>Welcome to a new experience of Dining.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main main-raised">
+        <div class="container">
+            <div class="section text-center" id="diners">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h2 class="title margin-up">Find the best restaurants, cafes and bars around you</h2>
+                        <h5 class="description">Look for your favorite restaurant or cuisines, Book a table at
+                            restaurants around you(Even before you arrive at the restaurant), Order food without having
+                            to wait and finally make payment when you are done enjoying your meal (without having to
+                            wait for the waiter), all at the tip of your fingers.</h5>
+                    </div>
+                </div>
+                <div class="features">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-success">
+                                    <i class="fas fa-map-marker-alt fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Find Restaurants</h4>
+                                <p>Find your favourite restaurant through our search or directly on the map</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-info">
+                                    <i class="fas fa-qrcode fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">QR-Code</h4>
+                                <p>Scan a code to check-in to the restaurant and get seated at a table in the location
+                                    you like. That's not all! You could also start ordering your food/drinks.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-info">
+                                    <i class="fas fa-money-bill-alt fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Split Bill</h4>
+                                <p>Got friends who forget to pay you after the meal. We got you covered! Split the bill
+                                    at source and let your friends pay through the app via different modes of payment
+                                    we support</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-success">
+                                    <i class="fas fa-utensils fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Menu</h4>
+                                <p>Interested in knowing more about the food you are ordering? Now through a digital
+                                    menu, see what goes in to preparing your food</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-danger">
+                                    <i class="fas fa-gift fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Offers & Rewards</h4>
+                                <p>Get exclusive offers and rewards at restaurants, cafes and bars</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-danger">
+                                    <i class="fas fa-ticket-alt fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Book Dineout</h4>
+                                <p>Now you can book a dineout from our wide network of restaurants/bars.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section text-center" id="features">
+                <div class="row">
+                    <div class="col-md-12 ml-auto mr-auto">
+                        <h2 class="title">For Business Owners</h2>
+                        <h5 class="description">Do you own a business and find it challenging to use multiple apps for
+                            different purposed at your restaurant,cafe or Bar.</h5>
+                    </div>
+                </div>
+                <div class="features">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-info">
+                                    <i class="fas fa-chart-pie fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Analytics</h4>
+                                <p>Don't just control your data! Find interesting insights to drive your business
+                                    smoothly and engage with customers through various dashboards and metrics the app
+                                    offers</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-success">
+                                    <i class="far fa-clock fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Control your Menu</h4>
+                                <p>Tired of maintaining images and PDF files of your menu? It's time to change the way
+                                    you do that. Take control of your menu with the ability to take items off
+                                    dynamically in real time along with bunch of attributes that holds the receipe,
+                                    price, availability, time to cook and more.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-danger">
+                                    <i class="fas fa-gift fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Offers & Rewards</h4>
+                                <p>Change current offers, Rollout new offers and reward returning customers based on
+                                    the analytics the app provides</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info">
+                                <div class="icon icon-info">
+                                    <i class="fas fa-money-bill-alt fa-4x " style="color:#A93466; "></i>
+                                </div>
+                                <h4 class="info-title">Social Media Integration</h4>
+                                <p>Worried about loosing feedback and rating on your active social media handles? Get
+                                    customer feedback and ratings from existing social media accounts and analyse
+                                    trends and much more.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section section-contacts" id="contact-us">
+                <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                        <h4 class="text-center title">Interested in knowing more about our product? Please leave your
+                            contact information below and our team will reach out to you</h4>
+                        <h4 id="signup-result" class="text-center title"></h4>
+                        <form class="contact-form">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Your Name</label>
+                                        <input id="signup_name" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Your Email</label>
+                                        <input id="signup_email" type="email" class="form-control">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div style="height:33px;">&nbsp;</div>
+                                        <label class="bmd-label-floating form-check-label">Do you manage <cite>Restaurant</cite>
+                                            or <cite>Bar</cite> ?</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <div class="form-check input-line">
+                                            <label class="bmd-label-floating form-check-label">
+                                                <input class="form-check-input" type="checkbox" value="restaurant" id="signup_restaurant">
+                                                Restaurant
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>&nbsp;&nbsp;
+                                            <label class="bmd-label-floating form-check-label">
+                                                <input class="form-check-input" type="checkbox" id="signup_bar" value="bar">
+                                                Bar
+                                                <span class="form-check-sign">
+                                                    <span class="check"></span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="bmd-label-floating">Restaurant/Bar Name</label>
+                                        <input id="signup_resname" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="exampleMessage" class="bmd-label-floating">Your Message</label>
+                                        <textarea id="signup_wishlist" type="email" class="form-control" rows="4" id="exampleMessage"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 ml-auto mr-auto text-center">
+                                    <button id="signup" class="btn btn-primary btn-raised">Signup</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer footer-default">
+        <div class="container">
+            <div class="copyright float-right">
+                &copy;
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>&nbsp;DineOServe.
+            </div>
+        </div>
+    </footer>
+    <!--   Core JS Files   -->
+
+    <script src="./assets/js/core/popper.min.js" type="text/javascript"></script>
+    <script src="./assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+    <script src="./assets/js/plugins/moment.min.js"></script>
+    <!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+    <script src="./assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
+    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
+    <script src="./assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
+    <!--	Plugin for Sharrre btn -->
+    <script src="./assets/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
+    <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+    <script src="./assets/js/material-kit.js?v=2.0.4" type="text/javascript"></script>
+</body>
+
+</html>
